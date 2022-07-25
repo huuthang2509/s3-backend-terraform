@@ -1,3 +1,5 @@
+data "aws_region" "current" {}
+
 resource "aws_resourcegroups_group" "resourcegroups_group" {
   name = "${var.namespace}-group"
 
