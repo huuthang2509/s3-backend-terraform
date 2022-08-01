@@ -5,8 +5,8 @@ provider "aws" {
 module "s3_backend" {
   source = "./s3-backend"
 
-  region = var.region
-  namespace = var.namespace
+  region            = var.region
+  namespace         = var.namespace
   iam_policies_json = var.iam_policies_json
 }
 

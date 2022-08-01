@@ -1,8 +1,8 @@
 resource "aws_dynamodb_table" "dynamodb_table" {
-  name         = "${var.namespace}-state-lock"
+  name = "${var.namespace}-state-lock"
 
   hash_key     = "LockID"
-  billing_mode = "PAY_PER_REQUEST" // Makes the database serverless instead of provisioned
+  billing_mode = "PAY_PER_REQUEST"
 
   # LockID -> Save locking state
   attribute {
