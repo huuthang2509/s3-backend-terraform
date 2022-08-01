@@ -16,14 +16,14 @@ locals {
 
   # Merge into 1 policy_document
   iam_policy_document = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = local.iam_policy_statements
   })
 }
 
 # Create policy
 resource "aws_iam_policy" "iam_policy" {
-  name = "${var.namespace}-tf-policy"
+  name   = "${var.namespace}-tf-policy"
   policy = local.iam_policy_document
 }
 
@@ -53,7 +53,7 @@ resource "aws_iam_role" "iam_role" {
 
 # Attach policy to role
 resource "aws_iam_role_policy_attachment" "policy_attach" {
-  role = aws_iam_role.iam_role.name
+  role       = aws_iam_role.iam_role.name
   policy_arn = aws_iam_policy.iam_policy.arn
 }
 

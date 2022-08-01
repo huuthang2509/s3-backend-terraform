@@ -3,6 +3,10 @@
 resource "aws_s3_bucket" "s3_bucket" {
   bucket = "${var.namespace}-state-bucket"
 
+  # Prevent accidental deletion s3
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
   tags = {
     ResourceGroup = var.namespace
   }
@@ -17,10 +21,10 @@ resource "aws_s3_bucket_acl" "s3_bucket" {
 # Block public access
 resource "aws_s3_bucket_public_access_block" "s3_bucket" {
   bucket = aws_s3_bucket.s3_bucket.id
-  
-  block_public_acls = true
-  block_public_policy = true
-  ignore_public_acls = true
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
@@ -46,7 +50,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "s3_bucket" {
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm = "aws:kms"
+      sse_algorithm     = "aws:kms"
       kms_master_key_id = aws_kms_key.kms_key.arn
     }
   }
